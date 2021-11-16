@@ -2,4 +2,5 @@
 that we've decided on for the final project"""
 
 def highScore:
-    
+
+def deal:
