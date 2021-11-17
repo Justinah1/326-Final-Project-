@@ -34,6 +34,58 @@ def highscore(file_path):
         
     score.sort(key=lambda x:int(x[1]), reverse = True)
     print(score)
+
+def CompTurn(hand, currCard):
+
+    goodHand = ()
+    hasCard = False
+    lowRank = 15
+    highRank = 0
+    deal = Card()
+    
+    if currCard.suit == "Spade":
+        for card in hand:
+            if card.suit = "Spade":
+                goodHand.append(card)
+                hasCard = True
+            else: 
+                goodHand = hand
+    elif currCard.suit == "Club":
+        for card in hand:
+            if card.suit = "Club":
+                goodHand.append(card)
+                hasCard = True
+            else: 
+                goodHand = hand
+    elif currCard.suit == "Heart":
+        for card in hand:
+            if card.suit = "Heart":
+                goodHand.append(card)
+                hasCard = True
+            else: 
+                goodHand = hand
+    elif currCard.suit == "Diamond":
+        for card in hand:
+            if card.suit = "Diamond":
+                goodHand.append(card)
+                hasCard = True
+            else: 
+                goodHand = hand
+    else:
+        goodHand = hand
+
+    if hasCard == True:
+        for card in goodHand:
+            if card.rank > highRank:
+                deal = card
+    elif hasCard == False:
+        for card in goodHand:
+            if card.rank < lowRank:
+                deal = card
+    
+    return deal
+
+        
         
     
             
