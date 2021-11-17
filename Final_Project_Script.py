@@ -46,16 +46,13 @@ def highscore(file_path):
     #         f.write('\t'.join(content) + "\n")
     print(score)
 
-<<<<<<< HEAD
 class Card:
     def __init__(self, suit, rank):
         self.suit = suit
         self.rank = rank
         
-=======
 
 
->>>>>>> d457d45b23f154933828be06713bafb9499346fb
 def CompTurn(hand, currCard):
     """CompTurn method that allows computer to take its turn. Checks the current card on the table 
         and determines what is the best card to play.
