@@ -46,58 +46,38 @@ def highscore(file_path):
     #         f.write('\t'.join(content) + "\n")
     print(score)
 
-<<<<<<< HEAD
-class Card:
-    def __init__(self, suit, rank):
-        self.suit = suit
-        self.rank = rank
-        
-=======
-
-
->>>>>>> d457d45b23f154933828be06713bafb9499346fb
 def CompTurn(hand, currCard):
-    """CompTurn method that allows computer to take its turn. Checks the current card on the table 
-        and determines what is the best card to play.
 
-        Args:
-            hand(list): list of card objects for the computer's hand
-            currCard(card): a card object representing the current card played
-
-        Returns:
-            playCard(card): returns a card object to play for the computer
-    """
-
-    goodHand = []
+    goodHand = ()
     hasCard = False
     lowRank = 15
     highRank = 0
-    playCard = Card()
+    deal = Card()
     
     if currCard.suit == "Spade":
         for card in hand:
-            if card.suit == "Spade":
+            if card.suit = "Spade":
                 goodHand.append(card)
                 hasCard = True
             else: 
                 goodHand = hand
     elif currCard.suit == "Club":
         for card in hand:
-            if card.suit == "Club":
+            if card.suit = "Club":
                 goodHand.append(card)
                 hasCard = True
             else: 
                 goodHand = hand
     elif currCard.suit == "Heart":
         for card in hand:
-            if card.suit == "Heart":
+            if card.suit = "Heart":
                 goodHand.append(card)
                 hasCard = True
             else: 
                 goodHand = hand
     elif currCard.suit == "Diamond":
         for card in hand:
-            if card.suit == "Diamond":
+            if card.suit = "Diamond":
                 goodHand.append(card)
                 hasCard = True
             else: 
@@ -108,17 +88,23 @@ def CompTurn(hand, currCard):
     if hasCard == True:
         for card in goodHand:
             if card.rank > highRank:
-                playCard = card
+                deal = card
     elif hasCard == False:
         for card in goodHand:
             if card.rank < lowRank:
-                playCard = card
+                deal = card
     
-    return playCard
-
-
+    return deal
 
 def deal():
+    """
+    This method takes the list returned from the deck() function, shuffles it,
+    and deals out 5 cards per round.
+    
+    Side effects:
+    shuffles a deck (list) of card objects and then players' cardlist is updated
+    with the cards they obtain by popping them out from the shuffled card deck.
+    """
     deck = deck() 
     shuffledDeck = deck.shuffle()
     amountOfCardsPerTrick = 1
@@ -127,3 +113,10 @@ def deal():
         while amountOfCardsPerTrick <= 5:
             player.cards.append(shuffledDeck.pop)
             amountOfCardsPerTrick += 1    
+    
+        
+    
+            
+        
+
+highscore("highscore.txt")
