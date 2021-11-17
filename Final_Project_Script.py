@@ -1,9 +1,10 @@
-""" this python script would be used to implement our program
-that we've decided on for the final project"""
-
+""" This python script would be used to implement the experimental 
+skeleton code of some of our methods that we've decided on for the final project"""
 
 
 def highscore(file_path):
+    """
+    """
     UserName = str(input("Enter a UserName: "))
     s = int(input("Enter new score: "))
     l =[UserName,s]
