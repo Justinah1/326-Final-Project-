@@ -38,14 +38,6 @@ def highscore(file_path):
         score.append(l)
         
     score.sort(key=lambda x:int(x[1]), reverse = True)
-    # with open(file_path, "w", encoding="utf-8") as f:
-    #     for content in score:
-    #         f.write(content)
-    # f.close()
-    # updated_list = str(score)
-    # with open(file_path, "w", encoding="utf-8") as f:
-    #     for content in str(score):
-    #         f.write('\t'.join(content) + "\n")
     print(score)
 
 class Card:
@@ -53,6 +45,8 @@ class Card:
         self.suit = suit
         self.rank = rank
         
+
+
 def CompTurn(hand, currCard):
 
     goodHand = ()
@@ -121,9 +115,17 @@ def deal():
             player.cards.append(shuffledDeck.pop)
             amountOfCardsPerTrick += 1    
     
-        
-    
-            
-        
+def deck(self):
+    """This method creates and sets the deck of cards 
 
-highscore("highscore.txt")
+    Returns:
+        deck [str]: returns all deck card values
+    """
+    
+    face = ["K","Q","J","A", "6", "7", "8", "9", "10"]
+    suits = ["Hearts","Spades","Clubs","Diamonds"]
+    deck = []
+    for i in face:
+        for x in suits:
+            deck.append(x + " of " + i)
+    return deck    
