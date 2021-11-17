@@ -46,6 +46,14 @@ def highscore(file_path):
     #         f.write('\t'.join(content) + "\n")
     print(score)
 
+<<<<<<< HEAD
+=======
+class Card:
+    def __init__(self, suit, rank):
+        self.suit = suit
+        self.rank = rank
+        
+>>>>>>> 75e499f08b7400d3dbfd21bc229f8221e9a15d3c
 def CompTurn(hand, currCard):
 
     goodHand = ()
