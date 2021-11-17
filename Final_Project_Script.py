@@ -46,6 +46,8 @@ def highscore(file_path):
     #         f.write('\t'.join(content) + "\n")
     print(score)
 
+
+
 def CompTurn(hand, currCard):
 
     goodHand = ()
@@ -94,10 +96,9 @@ def CompTurn(hand, currCard):
             if card.rank < lowRank:
                 deal = card
     
-<<<<<<< HEAD
     return deal
-=======
-    return deal
+
+
 
 def deal():
     deck = deck() 
@@ -108,11 +109,3 @@ def deal():
         while amountOfCardsPerTrick <= 5:
             player.cards.append(shuffledDeck.pop)
             amountOfCardsPerTrick += 1    
-    
-        
-    
-            
-        
-
-highscore("highscore.txt")
->>>>>>> 7d510eca3908112d9de710e408be7a256d4c72cc
