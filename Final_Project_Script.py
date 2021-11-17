@@ -126,12 +126,12 @@ def deck(self):
         deck [str]: returns all deck card values
     """
     
-    face = ['K','Q','J','A']
-    suits = ['Hearts','Spades','Clubs','Diamonds']
+    face = ["K","Q","J","A", "6", "7", "8", "9", "10"]
+    suits = ["Hearts","Spades","Clubs","Diamonds"]
     deck = []
     for i in face:
         for x in suits:
-            deck.append(x + ' of ' + i)
+            deck.append(x + " of " + i)
     return deck    
     
   
