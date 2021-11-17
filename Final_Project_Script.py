@@ -57,28 +57,28 @@ def CompTurn(hand, currCard):
     
     if currCard.suit == "Spade":
         for card in hand:
-            if card.suit = "Spade":
+            if card.suit == "Spade":
                 goodHand.append(card)
                 hasCard = True
             else: 
                 goodHand = hand
     elif currCard.suit == "Club":
         for card in hand:
-            if card.suit = "Club":
+            if card.suit == "Club":
                 goodHand.append(card)
                 hasCard = True
             else: 
                 goodHand = hand
     elif currCard.suit == "Heart":
         for card in hand:
-            if card.suit = "Heart":
+            if card.suit == "Heart":
                 goodHand.append(card)
                 hasCard = True
             else: 
                 goodHand = hand
     elif currCard.suit == "Diamond":
         for card in hand:
-            if card.suit = "Diamond":
+            if card.suit == "Diamond":
                 goodHand.append(card)
                 hasCard = True
             else: 
