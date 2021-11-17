@@ -35,38 +35,53 @@ def highscore(file_path):
     score.sort(key=lambda x:int(x[1]), reverse = True)
     print(score)
 
+class Card:
+    def __init__(self, suit, rank):
+        self.suit = suit
+        self.rank = rank
+        
 def CompTurn(hand, currCard):
+    """CompTurn method that allows computer to take its turn. Checks the current card on the table 
+        and determines what is the best card to play.
 
-    goodHand = ()
+        Args:
+            hand(list): list of card objects for the computer's hand
+            currCard(card): a card object representing the current card played
+
+        Returns:
+            playCard(card): returns a card object to play for the computer
+    """
+
+    goodHand = []
     hasCard = False
     lowRank = 15
     highRank = 0
-    deal = Card()
+    playCard = Card()
     
     if currCard.suit == "Spade":
         for card in hand:
-            if card.suit = "Spade":
+            if card.suit == "Spade":
                 goodHand.append(card)
                 hasCard = True
             else: 
                 goodHand = hand
     elif currCard.suit == "Club":
         for card in hand:
-            if card.suit = "Club":
+            if card.suit == "Club":
                 goodHand.append(card)
                 hasCard = True
             else: 
                 goodHand = hand
     elif currCard.suit == "Heart":
         for card in hand:
-            if card.suit = "Heart":
+            if card.suit == "Heart":
                 goodHand.append(card)
                 hasCard = True
             else: 
                 goodHand = hand
     elif currCard.suit == "Diamond":
         for card in hand:
-            if card.suit = "Diamond":
+            if card.suit == "Diamond":
                 goodHand.append(card)
                 hasCard = True
             else: 
@@ -77,13 +92,13 @@ def CompTurn(hand, currCard):
     if hasCard == True:
         for card in goodHand:
             if card.rank > highRank:
-                deal = card
+                playCard = card
     elif hasCard == False:
         for card in goodHand:
             if card.rank < lowRank:
-                deal = card
+                playCard = card
     
-    return deal
+    return playCard
 
         
         
