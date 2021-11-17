@@ -96,7 +96,16 @@ def CompTurn(hand, currCard):
     
     return deal
 
-        
+def deal():
+    deck = deck() 
+    shuffledDeck = deck.shuffle()
+    amountOfCardsPerTrick = 1
+    
+    for player in playersList:
+        while amountOfCardsPerTrick <= 5:
+            player.cards.append(shuffledDeck.pop)
+            amountOfCardsPerTrick += 1    
+    
         
     
             
