@@ -36,14 +36,6 @@ def highscore(file_path):
         score.append(l)
         
     score.sort(key=lambda x:int(x[1]), reverse = True)
-    # with open(file_path, "w", encoding="utf-8") as f:
-    #     for content in score:
-    #         f.write(content)
-    # f.close()
-    # updated_list = str(score)
-    # with open(file_path, "w", encoding="utf-8") as f:
-    #     for content in str(score):
-    #         f.write('\t'.join(content) + "\n")
     print(score)
 
 class Card:
@@ -135,7 +127,3 @@ def deck(self):
         for x in suits:
             deck.append(x + " of " + i)
     return deck    
-    
-  
-
-highscore("highscore.txt")
