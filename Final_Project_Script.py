@@ -120,6 +120,11 @@ def deal():
             amountOfCardsPerTrick += 1    
     
 def deck(self):
+    """This method creates and sets the deck of cards 
+
+    Returns:
+        deck [str]: returns all deck card values
+    """
     
     face = ['K','Q','J','A']
     suits = ['Hearts','Spades','Clubs','Diamonds']
