@@ -13,7 +13,6 @@ def highscore(file_path):
         
     Side effects:
         prints result of a modified list to console
-    
     """
     UserName = str(input("Enter a UserName: "))
     s = int(input("Enter new score: "))
