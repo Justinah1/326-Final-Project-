@@ -3,14 +3,17 @@ skeleton code of some of our methods that we've decided on for the final project
 
 
 def highscore(file_path):
-    """
+    """This method is used to keep track of the highscores 
+    of the top 10 players in the game
+    
+    Args:
+    file_path (str): this is the path to the text file needed to run the program
     """
     UserName = str(input("Enter a UserName: "))
     s = int(input("Enter new score: "))
     l =[UserName,s]
     with open(file_path, "r", encoding="utf-8") as f:
         f = f.readlines()
-        # print(f)
         score = []
         for line in f:
             line = line.strip()
@@ -33,13 +36,26 @@ def highscore(file_path):
         score.append(l)
         
     score.sort(key=lambda x:int(x[1]), reverse = True)
+    # with open(file_path, "w", encoding="utf-8") as f:
+    #     for content in score:
+    #         f.write(content)
+    # f.close()
+    # updated_list = str(score)
+    # with open(file_path, "w", encoding="utf-8") as f:
+    #     for content in str(score):
+    #         f.write('\t'.join(content) + "\n")
     print(score)
 
+<<<<<<< HEAD
 class Card:
     def __init__(self, suit, rank):
         self.suit = suit
         self.rank = rank
         
+=======
+
+
+>>>>>>> d457d45b23f154933828be06713bafb9499346fb
 def CompTurn(hand, currCard):
     """CompTurn method that allows computer to take its turn. Checks the current card on the table 
         and determines what is the best card to play.
@@ -100,10 +116,14 @@ def CompTurn(hand, currCard):
     
     return playCard
 
-        
-        
-    
-            
-        
 
-#highscore("highscore.txt")
+
+def deal():
+    deck = deck() 
+    shuffledDeck = deck.shuffle()
+    amountOfCardsPerTrick = 1
+    
+    for player in playersList:
+        while amountOfCardsPerTrick <= 5:
+            player.cards.append(shuffledDeck.pop)
+            amountOfCardsPerTrick += 1    
