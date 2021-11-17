@@ -1,3 +1,5 @@
+import random
+
 """ This python script would be used to implement the experimental 
 skeleton code of some of our methods that we've decided on for the final project"""
 import random
