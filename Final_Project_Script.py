@@ -95,11 +95,3 @@ def CompTurn(hand, currCard):
                 deal = card
     
     return deal
-
-        
-        
-    
-            
-        
-
-highscore("highscore.txt")
