@@ -108,9 +108,9 @@ def deal():
     """
     deck = deck() 
     shuffledDeck = deck.shuffle()
-    amountOfCardsPerTrick = 1
-    
+        
     for player in playersList:
+        amountOfCardsPerTrick = 1
         while amountOfCardsPerTrick <= 5:
             player.cards.append(shuffledDeck.pop)
             amountOfCardsPerTrick += 1    
