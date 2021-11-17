@@ -9,7 +9,11 @@ def highscore(file_path):
     of the top 10 players in the game
     
     Args:
-    file_path (str): this is the path to the text file needed to run the program
+        file_path (str): this is the path to the text file needed to run the program
+        
+    Side effects:
+        prints result of a modified list to console
+    
     """
     UserName = str(input("Enter a UserName: "))
     s = int(input("Enter new score: "))
@@ -48,6 +52,16 @@ class Card:
 
 
 def CompTurn(hand, currCard):
+    """This method implements the computer player's turn logic
+    
+    Args:
+        hand (list):the hand of the game
+        currCard (str): Current Card
+    
+    Returns:
+        deal(Card): the dealing of the cards
+    
+    """
 
     goodHand = ()
     hasCard = False
