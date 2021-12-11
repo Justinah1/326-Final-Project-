@@ -46,7 +46,13 @@ class Spar:
                 cards.append(x)
                 amountOfCardsPerTrick += 1  
             
-    def game():
+    def game(self):
+        turn = -1
+        player = None
+        while len(self.playersList[0].cards) > 0:
+            turn += 1
+            player = self.playersList[turn % len(self.playersList)]
+            if 
         
             
             
