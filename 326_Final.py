@@ -15,12 +15,12 @@ class Spar:
         deck [str]: returns all deck card values
     """
     
-        face = ["K","Q","J","A", "6", "7", "8", "9", "10"]
+        face = [14, 13, 12, 11, 10, 9, 8, 7, 6]
         suits = ["Hearts","Spades","Clubs","Diamonds"]
         self.deck = []
         for i in face:
             for x in suits:
-                if x is not "Spades" and i is not "A":
+                if x != "Spades" and i != "A":
                     self.deck.append(Card(i, x))
         return self.deck 
         
@@ -50,6 +50,7 @@ class Spar:
             turn += 1
             player = self.playersList[turn % len(self.playersList)]
             if len(self.playersList[0].cards) > 0:
+                
                 player.playTurn() 
         
 class Card:
@@ -73,3 +74,37 @@ class Player:
         first_card = int(input("Select a card (Using a number)"))
         self.currCard = self.cards.pop(first_card - 1)
         return self.currCard
+    
+class ComputerPlayer:
+    def __init__(self, name, currCard, cards = []):
+        self.name = name
+        self.cards = cards
+        self.currCard = currCard
+        
+    def getCurrCard(self, currCard):
+        self.currCard = currCard
+        
+    def compTurn(self):
+        highestFace = 0
+        lowestFace = 15
+        cardToDeal = Card()
+        goodHand = []
+        hasCard = False
+        
+        for card in self.cards:
+           if card.suit == self.currCard.suit:
+               goodHand.append(card)
+               hasCard = True
+        
+        if hasCard == True:
+            for card in goodHand:
+                if card.face > highestFace:
+                    cardToDeal = card
+                    highestFace = card.face
+        else:
+            goodHand = self.cards
+            for card in goodHand:
+               if card.face < lowestFace:
+                   cardToDeal = card
+                   lowestFace = card.face
+        return cardToDeal
