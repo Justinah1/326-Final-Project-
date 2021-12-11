@@ -1,14 +1,4 @@
 import random
-from random import randrange
-
-
-# suits = ["Spades", "Hearts", "Clubs", "Diamonds"]
-# values = [10, 9, 8, 7, 6, 11, 12, 13, 1]
-# deck = {}
-
-# for i in values:
-#     for x in suits:
-#         deck.append(x + " of " + i)
     
 class Spar:
     
