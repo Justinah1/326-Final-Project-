@@ -46,7 +46,7 @@ class Spar:
                 cards.append(x)
                 amountOfCardsPerTrick += 1  
             
-    #def game():
+    def game():
         
             
             
