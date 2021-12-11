@@ -1,4 +1,14 @@
 import random
+from random import randrange
+
+
+# suits = ["Spades", "Hearts", "Clubs", "Diamonds"]
+# values = [10, 9, 8, 7, 6, 11, 12, 13, 1]
+# deck = {}
+
+# for i in values:
+#     for x in suits:
+#         deck.append(x + " of " + i)
     
 class Spar:
     
@@ -35,23 +45,74 @@ class Spar:
                 
     def setCurrCard(self, player):
         self.currCard = player.playTurn()
+        
+    def scoring(self, num):
+        if num == 6:
+            return 3
+        elif num == 7:
+            return 2
+        else:
+            return 1
             
     def game(self):
-        turn = -1
+        
+        
+        compScore = 0
         round = 0
+        trick = 0
         player = None
         
-        if round == 0:
-            self.setCurrCard(self.playersList[0])
-            round += 1
-            turn += 1
+        compTrick = False
         
-        while round <= 5:
-            turn += 1
-            player = self.playersList[turn % len(self.playersList)]
-            if len(self.playersList[0].cards) > 0:
+        while round < 5:
+        
+            if trick == 0:
+                self.setCurrCard(self.playersList[0])
+                compCardPlayed = self.playerList[1].compTurn()
+                if compCardPlayed.suit == self.currCard.suit:
+                    if compCardPlayed.face > self.currCard.face:
+                        compTrick = True
+                        
+                trick += 1
                 
-                player.playTurn() 
+            
+            while trick < 5:
+                
+                if compTrick == True:
+                    self.currCard = self.playersList[1].compTurn()
+                    
+                    playedCard = self.playersList[0].compTurn()
+                    
+                    if playedCard.suit == self.currCard.suit:
+                        if playedCard.face > self.currCard.face:
+                            if trick == 4:
+                                self.score += self.scoring(playedCard.face)
+                            compTrick = False
+                    else:
+                        compTrick = True
+                        if trick == 4:
+                            compScore += self.scoring(compCardPlayed.face)
+                else:
+                    self.currCard = self.playersList[0].playTurn()
+                    
+                    compCardPlayed = self.playersList[1].compTurn()
+                    
+                    if compCardPlayed.suit == self.currCard.suit:
+                        if compCardPlayed.face > self.currCard.face:
+                            if trick == 4:
+                                compScore += self.scoring(compCardPlayed.face)
+                            compTrick = True
+                    else:
+                        compTrick = False
+                        if trick == 4:
+                            self.score += self.scoring(playedCard.face)
+                            
+            round += 1
+            
+            
+            
+          
+            
         
 class Card:
     def __init(self, face, suit):
