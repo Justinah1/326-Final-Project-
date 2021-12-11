@@ -43,6 +43,8 @@ class Spar:
         
         if round == 0:
             self.setCurrCard(self.playersList[0])
+            round += 1
+            turn += 1
         
         while round <= 5:
             turn += 1
