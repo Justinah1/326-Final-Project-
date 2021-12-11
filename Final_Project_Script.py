@@ -110,7 +110,7 @@ def CompTurn(hand, currCard):
     
     return deal
 
-def deal():
+def deal(self):
     """
     This method takes the list returned from the deck() function, shuffles it,
     and deals out 5 cards per round.
@@ -119,10 +119,10 @@ def deal():
     shuffles a deck (list) of card objects and then players' cardlist is updated
     with the cards they obtain by popping them out from the shuffled card deck.
     """
-    deck = deck() 
+    deck = self.deck() 
     shuffledDeck = deck.shuffle()
         
-    for player in playersList:
+    for player in self.playersList:
         amountOfCardsPerTrick = 1
         while amountOfCardsPerTrick <= 5:
             player.cards.append(shuffledDeck.pop)
