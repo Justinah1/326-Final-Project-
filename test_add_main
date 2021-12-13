@@ -190,3 +190,6 @@ def parse_args(arglist):
 if __name__ == "__main__":
     args = parse_args(sys.argv[1:])
     main(args.names, args.computer_player)
+    
+    
+#Test the code in terminal with this example (if mac): python3 filename player_name -c
