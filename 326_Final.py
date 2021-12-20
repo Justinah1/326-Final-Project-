@@ -1,10 +1,7 @@
 from argparse import ArgumentParser
 import sys
 import random
-<<<<<<< HEAD
 
-=======
->>>>>>> ed24b3764efb913d59a055461fdfff4c6826170c
     
 class Spar:
     
