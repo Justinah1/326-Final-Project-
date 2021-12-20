@@ -1,21 +1,18 @@
 from argparse import ArgumentParser
 import sys
 import random
-<<<<<<< HEAD
 
-=======
->>>>>>> ed24b3764efb913d59a055461fdfff4c6826170c
     
 class Spar:
     
-    def __init__(self, score, deck = [], playersList = [], currCard = None):
+    def __init__(self, score, deck, playersList, currCard = None):
         self.score = score
         self.deck = deck
         self.playersList = playersList
         self.currCard = currCard
         
     
-    def newDeck(self):
+    def deck(self):
         """This method creates and sets the deck of cards 
         Returns:
         deck [str]: returns all deck card values
@@ -23,21 +20,20 @@ class Spar:
     
         face = [14, 13, 12, 11, 10, 9, 8, 7, 6]
         suits = ["Hearts","Spades","Clubs","Diamonds"]
-        deck = []
+        self.deck = []
         for i in face:
             for x in suits:
-                if x != "Spades" and i != 14:
-                    deck.append(Card(i, x))
-        return deck 
+                if x != "Spades" and i != "A":
+                    self.deck.append(Card(i, x))
+        return self.deck 
         
     def deal(self):
-        shuffledDeck = self.newDeck()
-        random.shuffle(shuffledDeck)
+        shuffledDeck = random.shuffle(self.deck())
         
         for player in self.playersList:
             amountOfCardsPerTrick = 1
             while amountOfCardsPerTrick <= 5:
-                player.dealCards(shuffledDeck.pop())
+                player.cards.append(shuffledDeck.pop())
                 amountOfCardsPerTrick += 1  
                 
     def setCurrCard(self, player):
@@ -51,12 +47,13 @@ class Spar:
         else:
             return 1
             
-    def game(self): 
+    def game(self):
+        
+        
         compScore = 0
         round = 0
         trick = 0
-        
-        self.deal()
+        player = None
         
         compTrick = False
         
@@ -64,7 +61,7 @@ class Spar:
         
             if trick == 0:
                 self.setCurrCard(self.playersList[0])
-                compCardPlayed = self.playersList[1].compTurn()
+                compCardPlayed = self.playerList[1].compTurn()
                 if compCardPlayed.suit == self.currCard.suit:
                     if compCardPlayed.face > self.currCard.face:
                         compTrick = True
@@ -104,31 +101,25 @@ class Spar:
                             self.score += self.scoring(playedCard.face)
                             
             round += 1
-                   
+            
+            
+            
+          
+            
+        
 class Card:
     def __init__(self, face, suit):
         self.suit = suit
         self.face = face
     
     def __repr__(self):
-        return (f"Card({self.suit},{self.face}")    
-        
-   # def __str__(self):
-   #     print("test")
-        
-         
+        print(f"Card({self.suit},{self.face}")     
             
 class Player:
-    def __init__(self, name, currCard = Card(14, "Hearts"), cards = []):
+    def __init__(self, name, currCard, cards = []):
         self.name = name
         self.cards = cards
         self.currCard = currCard
-        
-    def dealCards(self, card):
-        self.cards.append(card)
-        
-    #def __str__(self):
-    #    print("test")
         
     def playTurn(self):
        
@@ -139,13 +130,10 @@ class Player:
         return self.currCard
     
 class ComputerPlayer:
-    def __init__(self, name, currCard = Card(14, "Hearts"), cards = []):
+    def __init__(self, name, currCard, cards = []):
         self.name = name
         self.cards = cards
         self.currCard = currCard
-    
-    def dealCards(self, card):
-        self.cards.append(card)
         
     def getCurrCard(self, currCard):
         self.currCard = currCard
@@ -153,7 +141,7 @@ class ComputerPlayer:
     def compTurn(self):
         highestFace = 0
         lowestFace = 15
-        cardToDeal = Card(14, "Hearts")
+        cardToDeal = Card()
         goodHand = []
         hasCard = False
         
@@ -175,11 +163,12 @@ class ComputerPlayer:
                    lowestFace = card.face
         return cardToDeal
 
-def main(human_players, computer_player):
-    players = [Player(human_players), ComputerPlayer(computer_player)]
-   
-    game = Spar(score = 0, playersList= players)
-    game.game()
+def main(human_players, computer_player=False):
+    players = [Player(name) for name in human_players]
+    if computer_player:
+        players.append(ComputerPlayer("Computer"))
+    game = Spar(players)
+    game.game
 
 
 def parse_args(arglist):
