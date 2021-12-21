@@ -1,21 +1,41 @@
+""" This is a card game called spar. Spar is a card game between a human player and a computer 
+        player with each player being dealt 5 cards. The goal is to match the suite of the current card
+"""
+
 from argparse import ArgumentParser
 import sys
 import random
 
     
 class Spar:
+    """
+    The spar class should have the dealing of cards, the deck, and the game itself
+    
+    Attributes:
+        score(int): Used to keep track of scores after each round
+        deck(list): The list that contains the suits and faces of the cards
+        currCard(str): The current on the table
+    """
     
     def __init__(self, score, deck = [], playersList = [], currCard = None):
+        """sets the attributes
+        
+        Args:
+            score(int): Used to keep track of scores after each round
+            deck(list): The list that contains the suits and faces of the cards
+            currCard(str): The current on the table
+        """
         self.score = score
         self.deck = deck
-        self.playersList = playersList
+        # self.playersList = playersList
         self.currCard = currCard
         
     
     def newDeck(self):
         """This method creates and sets the deck of cards 
+        
         Returns:
-        deck [str]: returns all deck card values
+            deck [str]: returns all deck card values
     """
     
         face = [14, 13, 12, 11, 10, 9, 8, 7, 6]
@@ -28,6 +48,8 @@ class Spar:
         return deck 
         
     def deal(self):
+        """ This method deals the cards for the players
+        """
         shuffledDeck = self.newDeck()
         random.shuffle(shuffledDeck)
         
@@ -38,10 +60,23 @@ class Spar:
                 amountOfCardsPerTrick += 1  
                 
     def setCurrCard(self, player):
+        """ This method sets the current card on the table
+        
+        Args:
+            player(str):
+        """
         self.currCard = player.playTurn()
         player.getCurrCard(self.currCard)
         
     def scoring(self, num):
+        """ This method is used to keep track of the scores
+        
+        Args:
+            num():
+            
+        Returns:
+        
+        """
         if num == 6:
             return 3
         elif num == 7:
@@ -50,6 +85,8 @@ class Spar:
             return 1
             
     def game(self): 
+        """This is the method that describes and sets the game and how the game will be played
+        """
         compScore = 0
         round = 0
         trick = 0
@@ -123,11 +160,7 @@ class Card:
         self.face = face
     
     def __repr__(self):
-        return (f"{self.suit},{self.face}")    
-        
-   # def __str__(self):
-   #     print("test")
-        
+        return (f"{self.suit},{self.face}")        
          
             
 class Player:
@@ -142,8 +175,6 @@ class Player:
     def getCurrCard(self, currCard):
         self.currCard = currCard
         
-    #def __str__(self):
-    #    print("test")
         
     def playTurn(self):
        
