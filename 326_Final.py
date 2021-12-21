@@ -5,6 +5,7 @@
 from argparse import ArgumentParser
 import sys
 import random
+from termcolor import colored
 
     
 class Spar:
@@ -146,7 +147,8 @@ class Spar:
                             if trick == 4:
                                 compScore += self.scoring(compCardPlayed.face)
                             compTrick = True
-                            print("**COMPUTER WON TRICK**")
+                            text = colored("**COMPUTER WON TRICK**", 'red', attrs=['reverse', 'blink']) 
+                            print(text)
                     else:
                         compTrick = False
                         print("**PLAYER WON TRICK**")
