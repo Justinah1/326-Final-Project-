@@ -5,6 +5,8 @@
 from argparse import ArgumentParser
 import sys
 import random
+from termcolor import colored
+from colorama import Fore
 
     
 class Spar:
@@ -120,12 +122,15 @@ class Spar:
         compTrick = False
         
         while round < 3:
-            print("====ROUND " + str(round + 1) + "====")
-            
+            print(Fore.LIGHTMAGENTA_EX + "====ROUND " + str(round + 1) + "====")
+            print(Fore.WHITE)
             if trick == 0:
-                print("---TRICK 1---")
+                a = Fore.CYAN + "---TRICK 1---"
+                print(a)
+                print(Fore.WHITE)
                 self.setCurrCard(self.playersList[0]) #sets the spar class' current card
-                print("CURRENT CARD ON TABLE: " + str(self.currCard)) # displays what it is
+                print(Fore.LIGHTBLUE_EX + "CURRENT CARD ON TABLE: " + str(self.currCard)) # displays what it is
+                print(Fore.WHITE)
                 print("")
                 
                 self.playersList[1].getCurrCard(self.currCard) # computer gets the card on the table
@@ -134,22 +139,27 @@ class Spar:
                 if compCardPlayed.suit == self.currCard.suit:
                     if compCardPlayed.face > self.currCard.face:
                         compTrick = True
-                        print("**COMPUTER WON TRICK**----------------")
+                        a =colored("**COMPUTER WON TRICK**----------------", 'yellow', attrs=['reverse', 'blink']) 
+                        print(a)
                         print("")
                     else:
-                        print("**PLAYER WON TRICK**----------------") 
+                        b =colored("**PLAYER WON TRICK**----------------", 'green', attrs=['reverse', 'blink']) 
+                        print(b)
                         print("") 
                 else:
-                    print("**PLAYER WON TRICK**----------------") 
+                    c =colored("**PLAYER WON TRICK**----------------", 'green', attrs=['reverse', 'blink']) 
+                    print(c)
                     print("")       
                 trick += 1
                 
             
             while trick < 5:
-                print("---TRICK " + str(trick + 1) + "---")
+                print(Fore.CYAN + "---TRICK " + str(trick + 1) + "---")
+                print(Fore.WHITE)
                 if compTrick == True: #computer won previous trick so it goes again
                     self.currCard = self.playersList[1].compTurn() #computer plays card
-                    print("CURRENT CARD ON TABLE: " + str(self.currCard))
+                    print(Fore.LIGHTBLUE_EX + "CURRENT CARD ON TABLE: " + str(self.currCard))
+                    print(Fore.WHITE)
                     print("")
                     playedCard = self.playersList[0].playTurn() #player plays a card
                     
@@ -157,7 +167,8 @@ class Spar:
                     if playedCard.suit == self.currCard.suit: # check if player card has matching suit
                         if playedCard.face > self.currCard.face: # check if player card has better face
                             compTrick = False # set false if player card wins
-                            print("**PLAYER WON TRICK**----------------")
+                            d =colored("**PLAYER WON TRICK**----------------", 'green', attrs=['reverse', 'blink']) 
+                            print(d)
                             print("")
                             if trick == 4: # if 4th trick then get score for player 
                                 self.score += self.scoring(playedCard.face)
@@ -166,7 +177,8 @@ class Spar:
                                 print("")
                         else:
                             compTrick = True # set true if player card does not have matching suit
-                            print("**COMPUTER WON TRICK**----------------")
+                            e =colored("**COMPUTER WON TRICK**----------------", 'yellow', attrs=['reverse', 'blink']) 
+                            print(e)
                             print("")
                             if trick == 4:
                                 overallCompScore += self.scoring(compCardPlayed.face)
@@ -175,7 +187,8 @@ class Spar:
                                 print("")
                     else:
                         compTrick = True # set true if player card does not have matching suit
-                        print("**COMPUTER WON TRICK**----------------")
+                        f =colored("**COMPUTER WON TRICK**----------------", 'yellow', attrs=['reverse', 'blink']) 
+                        print(f)
                         print("")
                         if trick == 4:
                             overallCompScore += self.scoring(compCardPlayed.face)
@@ -185,18 +198,22 @@ class Spar:
                 else:
                     self.currCard = self.playersList[0].playTurn()
                     playedCard = self.currCard
-                    print("CURRENT CARD ON TABLE: " + str(self.currCard))
+                    print(Fore.LIGHTBLUE_EX + "CURRENT CARD ON TABLE: " + str(self.currCard))
                     print("")
+                    print(Fore.WHITE)
                     self.playersList[1].getCurrCard(self.currCard) #gives the computer the card on the table
                     compCardPlayed = self.playersList[1].compTurn() # computer plays card
                     
                     if compCardPlayed.suit == self.currCard.suit:
                         if compCardPlayed.face > self.currCard.face:
                             compTrick = True
-                            print("**COMPUTER WON TRICK**----------------")
+                            text =colored("**COMPUTER WON TRICK**----------------", 'yellow', attrs=['reverse', 'blink']) 
+                            print(text)
+                            print("")
                         else:
                             compTrick = False
-                            print("**PLAYER WON TRICK**----------------")
+                            g =colored("**PLAYER WON TRICK**----------------", 'green', attrs=['reverse', 'blink']) 
+                            print(g)
                             print("")
                             if trick == 4:
                                 self.score += self.scoring(playedCard.face)
@@ -205,7 +222,8 @@ class Spar:
                                 print("")
                     else:
                         compTrick = False
-                        print("**PLAYER WON TRICK**----------------")
+                        h =colored("**PLAYER WON TRICK**----------------", 'green', attrs=['reverse', 'blink']) 
+                        print(h)
                         print("")
                         if trick == 4:
                             self.score += self.scoring(playedCard.face)
@@ -323,6 +341,9 @@ class Player:
         print("")
         return self.currCard
     
+    
+    
+    
 class ComputerPlayer:
     """Manages Computer's turn
     
@@ -404,6 +425,9 @@ class ComputerPlayer:
         print("")
         return cardToDeal
 
+
+
+
 def main(name, computer_player):
     """ sets up and play a game of spar
     
@@ -418,6 +442,7 @@ def main(name, computer_player):
    
     game = Spar(score = 0, playersList= players)
     game.game()
+
 
 
 def parse_args(arglist):
