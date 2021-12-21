@@ -27,7 +27,7 @@ class Spar:
         """
         self.score = score
         self.deck = deck
-        # self.playersList = playersList
+        self.playersList = playersList
         self.currCard = currCard
         
     
@@ -90,7 +90,7 @@ class Spar:
     def game(self): 
         """This is the method that describes and sets the game and how the game will be played
         """
-        compScore = 0   
+        overallCompScore = 0   
         round = 0
         trick = 0
         
@@ -98,64 +98,125 @@ class Spar:
         
         compTrick = False
         
-        while round < 5:
-        
+        while round < 2:
+            print("====ROUND " + str(round + 1) + "====")
+            
             if trick == 0:
-                print("TRICK 1:")
+                print("---TRICK 1---")
                 self.setCurrCard(self.playersList[0]) #sets the spar class' current card
                 print("CURRENT CARD ON TABLE: " + str(self.currCard)) # displays what it is
-                compCardPlayed = self.playersList[1].compTurn() # Computer player's cards are shown and uses a card
+                print("")
                 
-                self.playersList[1].getCurrCard(self.currCard)
+                self.playersList[1].getCurrCard(self.currCard) # computer gets the card on the table
+                compCardPlayed = self.playersList[1].compTurn() # Computer player's cards are shown and uses a card
                 
                 if compCardPlayed.suit == self.currCard.suit:
                     if compCardPlayed.face > self.currCard.face:
                         compTrick = True
-                        print("**COMPUTER WON TRICK**")
+                        print("**COMPUTER WON TRICK**----------------")
+                        print("")
+                    else:
+                        print("**PLAYER WON TRICK**----------------") 
+                        print("") 
                 else:
-                    print("**PLAYER WON TRICK**")        
+                    print("**PLAYER WON TRICK**----------------") 
+                    print("")       
                 trick += 1
                 
             
             while trick < 5:
-                print("TRICK " + str(trick + 1))
-                if compTrick == True:
-                    self.currCard = self.playersList[1].compTurn()
+                print("---TRICK " + str(trick + 1) + "---")
+                if compTrick == True: #computer won previous trick so it goes again
+                    self.currCard = self.playersList[1].compTurn() #computer plays card
                     print("CURRENT CARD ON TABLE: " + str(self.currCard))
-                    playedCard = self.playersList[0].playTurn()
+                    print("")
+                    playedCard = self.playersList[0].playTurn() #player plays a card
                     
                     
-                    if playedCard.suit == self.currCard.suit:
-                        if playedCard.face > self.currCard.face:
-                            if trick == 4:
+                    if playedCard.suit == self.currCard.suit: # check if player card has matching suit
+                        if playedCard.face > self.currCard.face: # check if player card has better face
+                            compTrick = False # set false if player card wins
+                            print("**PLAYER WON TRICK**----------------")
+                            print("")
+                            if trick == 4: # if 4th trick then get score for player 
                                 self.score += self.scoring(playedCard.face)
-                            compTrick = False
-                            print("**PLAYER WON TRICK**")
+                                tempPlayerScore = self.scoring(playedCard.face)
+                                print("PLAYER EARNED: " + str(tempPlayerScore) + " POINTS")
+                                print("")
+                        else:
+                            compTrick = True # set true if player card does not have matching suit
+                            print("**COMPUTER WON TRICK**----------------")
+                            print("")
+                            if trick == 4:
+                                overallCompScore += self.scoring(compCardPlayed.face)
+                                tempCompScore = self.scoring(compCardPlayed.face)
+                                print("COMPUTER EARNED: " + str(tempCompScore) + " POINTS")
+                                print("")
                     else:
-                        compTrick = True
-                        print("**COMPUTER WON TRICK**")
+                        compTrick = True # set true if player card does not have matching suit
+                        print("**COMPUTER WON TRICK**----------------")
+                        print("")
                         if trick == 4:
-                            compScore += self.scoring(compCardPlayed.face)
+                            overallCompScore += self.scoring(compCardPlayed.face)
+                            tempCompScore = self.scoring(compCardPlayed.face)
+                            print("COMPUTER EARNED: " + str(tempCompScore) + " POINTS")
+                            print("")
                 else:
                     self.currCard = self.playersList[0].playTurn()
+                    playedCard = self.currCard
                     print("CURRENT CARD ON TABLE: " + str(self.currCard))
-                    compCardPlayed = self.playersList[1].compTurn()
+                    print("")
+                    self.playersList[1].getCurrCard(self.currCard) #gives the computer the card on the table
+                    compCardPlayed = self.playersList[1].compTurn() #computer plays card
                     
                     if compCardPlayed.suit == self.currCard.suit:
                         if compCardPlayed.face > self.currCard.face:
-                            if trick == 4:
-                                compScore += self.scoring(compCardPlayed.face)
                             compTrick = True
-                            print("**COMPUTER WON TRICK**")
+                            print("**COMPUTER WON TRICK**----------------")
+                            print("")
+                            if trick == 4:
+                                overallCompScore += self.scoring(compCardPlayed.face)
+                                tempCompScore = self.scoring(compCardPlayed.face)
+                                print("COMPUTER EARNED: " + str(tempCompScore) + " POINTS")
+                                print("")
+                        else:
+                            compTrick = False
+                            print("**PLAYER WON TRICK**----------------")
+                            print("")
+                            if trick == 4:
+                                self.score += self.scoring(playedCard.face)
+                                tempPlayerScore = self.scoring(playedCard.face)
+                                print("PLAYER EARNED: " + str(tempPlayerScore) + " POINTS")
+                                print("")
                     else:
                         compTrick = False
-                        print("**PLAYER WON TRICK**")
+                        print("**PLAYER WON TRICK**----------------")
+                        print("")
                         if trick == 4:
                             self.score += self.scoring(playedCard.face)
+                            tempPlayerScore = self.scoring(playedCard.face)
+                            print("PLAYER EARNED: " + str(tempPlayerScore) + " POINTS")
+                            print("")
                 trick += 1
                             
             round += 1
+            trick = 0
+            compTrick = False
             self.deal()
+            
+        if self.score > overallCompScore:
+            print("YOU BEAT THE COMPUTER!!")
+            print("PLAYER SCORE:" + str(self.score))
+            print("COMPUTER SCORE: " + str(overallCompScore))
+        elif self.score == overallCompScore:
+            print("YOU TIED!!!!")
+            print("PLAYER SCORE:" + str(self.score))
+            print("COMPUTER SCORE: " + str(overallCompScore))
+        else:
+            print("YOU LOST TO THE COMPUTER!!")
+            print("COMPUTER SCORE: " + str(overallCompScore))
+            print("PLAYER SCORE:" + str(self.score))
+            
                    
 class Card:
     """Creates cards for class and prints values
@@ -254,14 +315,16 @@ class ComputerPlayer:
         if hasCard == True:
             for card in goodHand:
                 if card.face > highestFace:
-                    cardToDeal = self.cards.pop(self.cards.index(card))
+                    cardToDeal = card
                     highestFace = card.face
+            self.cards.pop(self.cards.index(cardToDeal))
         else:
             goodHand = self.cards
             for card in goodHand:
                if card.face < lowestFace:
-                   cardToDeal = self.cards.pop(self.cards.index(card))
+                   cardToDeal = card
                    lowestFace = card.face
+            self.cards.pop(self.cards.index(cardToDeal))
         print("COMPUTER CARD PLAYED: " + str(cardToDeal))
         print("")
         return cardToDeal
