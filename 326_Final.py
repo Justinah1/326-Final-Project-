@@ -41,21 +41,21 @@ class Spar:
         face = [14, 13, 12, 11, 10, 9, 8, 7, 6]
         suits = ["Hearts","Spades","Clubs","Diamonds"]
         deck = []
-        for i in face:
-            for x in suits:
+        for i in face: # Goes through the face list
+            for x in suits: # Goes through the suits list
                 if x != "Spades" and i != 14:
                     deck.append(Card(i, x))
-        return deck 
+        return deck # returns a list of tuples
         
     def deal(self):
         """ This method deals the cards for the players
         """
-        shuffledDeck = self.newDeck()
-        random.shuffle(shuffledDeck)
+        shuffledDeck = self.newDeck() # makes a deck
+        random.shuffle(shuffledDeck) # shuffles the list of tuples (cards)
         
-        for player in self.playersList:
+        for player in self.playersList: 
             amountOfCardsPerTrick = 1
-            while amountOfCardsPerTrick <= 5:
+            while amountOfCardsPerTrick <= 5: # setting the max number of cards per trick
                 player.dealCards(shuffledDeck.pop())
                 amountOfCardsPerTrick += 1  
                 
@@ -65,8 +65,11 @@ class Spar:
         Args:
             player(str):
         """
-        self.currCard = player.playTurn()
-        player.getCurrCard(self.currCard)
+        self.currCard = player.playTurn()   # prints out player's cards
+                                            # and also sets the current card
+                                            
+        player.getCurrCard(self.currCard)   # sets player's current card within
+                                            # the spar class
         
     def scoring(self, num):
         """ This method is used to keep track of the scores
@@ -87,11 +90,11 @@ class Spar:
     def game(self): 
         """This is the method that describes and sets the game and how the game will be played
         """
-        compScore = 0
+        compScore = 0   
         round = 0
         trick = 0
         
-        self.deal()
+        self.deal() # deals cards out to the players
         
         compTrick = False
         
@@ -99,9 +102,9 @@ class Spar:
         
             if trick == 0:
                 print("TRICK 1:")
-                self.setCurrCard(self.playersList[0])
-                print("CURRENT CARD ON TABLE: " + str(self.currCard))
-                compCardPlayed = self.playersList[1].compTurn()
+                self.setCurrCard(self.playersList[0]) #sets the spar class' current card
+                print("CURRENT CARD ON TABLE: " + str(self.currCard)) # displays what it is
+                compCardPlayed = self.playersList[1].compTurn() # Computer player's cards are shown and uses a card
                 
                 self.playersList[1].getCurrCard(self.currCard)
                 
