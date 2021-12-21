@@ -1,23 +1,11 @@
-<<<<<<< HEAD
 """ This is a card game called spar. Spar is a card game between a human player and a computer 
         player with each player being dealt 5 cards. The goal is to match the suite of the current card
 """
 
 from argparse import ArgumentParser
 import sys
-=======
->>>>>>> 8dc3fcf1eb5883f90ea308ead0af8c4d45777e56
 import random
-from random import randrange
 
-
-# suits = ["Spades", "Hearts", "Clubs", "Diamonds"]
-# values = [10, 9, 8, 7, 6, 11, 12, 13, 1]
-# deck = {}
-
-# for i in values:
-#     for x in suits:
-#         deck.append(x + " of " + i)
     
 class Spar:
     """
@@ -29,7 +17,6 @@ class Spar:
         currCard(str): The current on the table
     """
     
-<<<<<<< HEAD
     def __init__(self, score, deck = [], playersList = [], currCard = None):
         """sets the attributes
         
@@ -38,9 +25,7 @@ class Spar:
             deck(list): The list that contains the suits and faces of the cards
             currCard(str): The current on the table
         """
-=======
     def __init__(self, score, deck, playersList, currCard = None):
->>>>>>> 8dc3fcf1eb5883f90ea308ead0af8c4d45777e56
         self.score = score
         self.deck = deck
         # self.playersList = playersList
@@ -64,14 +49,11 @@ class Spar:
         return self.deck 
         
     def deal(self):
-<<<<<<< HEAD
         """ This method deals the cards for the players
         """
         shuffledDeck = self.newDeck()
         random.shuffle(shuffledDeck)
-=======
         shuffledDeck = random.shuffle(self.deck())
->>>>>>> 8dc3fcf1eb5883f90ea308ead0af8c4d45777e56
         
         for player in self.playersList:
             amountOfCardsPerTrick = 1
@@ -103,15 +85,12 @@ class Spar:
         else:
             return 1
             
-<<<<<<< HEAD
     def game(self): 
         """This is the method that describes and sets the game and how the game will be played
         """
-=======
     def game(self):
         
         
->>>>>>> 8dc3fcf1eb5883f90ea308ead0af8c4d45777e56
         compScore = 0
         round = 0
         trick = 0
@@ -180,16 +159,12 @@ class Card:
         self.face = face       
     
     def __repr__(self):
-<<<<<<< HEAD
-        return (f"{self.suit},{self.face}")        
-         
-=======
         """Create a method using __repr__ to get a printable representation of the object
-                Returns:
-                    f-string
-        """
-        print(f"Card({self.face},{self.suit}")     
->>>>>>> 8dc3fcf1eb5883f90ea308ead0af8c4d45777e56
+        
+        Returns:
+            f-string
+        """  
+        return (f"{self.suit},{self.face}")        
             
 class Player:
     """Manages player turn
@@ -204,7 +179,6 @@ class Player:
         self.cards = cards
         self.currCard = currCard
         
-<<<<<<< HEAD
     def dealCards(self, card):
         self.cards.append(card)
     
@@ -212,8 +186,6 @@ class Player:
         self.currCard = currCard
         
         
-=======
->>>>>>> 8dc3fcf1eb5883f90ea308ead0af8c4d45777e56
     def playTurn(self):
         """Prints out player cards
 
