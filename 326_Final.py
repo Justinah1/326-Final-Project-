@@ -167,7 +167,7 @@ class Spar:
                     print("CURRENT CARD ON TABLE: " + str(self.currCard))
                     print("")
                     self.playersList[1].getCurrCard(self.currCard) #gives the computer the card on the table
-                    compCardPlayed = self.playersList[1].compTurn() #computer plays card
+                    compCardPlayed = self.playersList[1].compTurn() # computer plays card
                     
                     if compCardPlayed.suit == self.currCard.suit:
                         if compCardPlayed.face > self.currCard.face:
