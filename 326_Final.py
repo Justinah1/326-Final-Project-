@@ -5,7 +5,6 @@
 from argparse import ArgumentParser
 import sys
 import random
-from termcolor import colored
 
     
 class Spar:
@@ -15,6 +14,7 @@ class Spar:
     Attributes:
         score(int): Used to keep track of scores after each round
         deck(list): The list that contains the suits and faces of the cards
+        playersList(list): The list of players
         currCard(str): The current on the table
     """
     
@@ -24,6 +24,7 @@ class Spar:
         Args:
             score(int): Used to keep track of scores after each round
             deck(list): The list that contains the suits and faces of the cards
+            playersList(list): The list of players
             currCard(str): The current on the table
         """
         self.score = score
@@ -36,7 +37,7 @@ class Spar:
         """This method creates and sets the deck of cards 
         
         Returns:
-            deck [str]: returns all deck card values
+            deck (str): returns all deck card values
     """
     
         face = [14, 13, 12, 11, 10, 9, 8, 7, 6]
@@ -47,9 +48,15 @@ class Spar:
                 if x != "Spades" and i != 14:
                     deck.append(Card(i, x))
         return deck # returns a list of tuples
+    
+    
+    
         
     def deal(self):
-        """ This method deals the cards for the players
+        """ This method deals and shuffles the cards for the players
+        
+        Side effects:
+            It modifies the card hand of player and computer objects
         """
         shuffledDeck = self.newDeck() # makes a deck
         random.shuffle(shuffledDeck) # shuffles the list of tuples (cards)
@@ -58,28 +65,33 @@ class Spar:
             amountOfCardsPerTrick = 1
             while amountOfCardsPerTrick <= 5: # setting the max number of cards per trick
                 player.dealCards(shuffledDeck.pop())
-                amountOfCardsPerTrick += 1  
+                amountOfCardsPerTrick += 1 
+                
+                 
                 
     def setCurrCard(self, player):
-        """ This method sets the current card on the table
+        """ This method sets the current card on the table. Allows the players
+            to play their card and is only used for the first trick.
         
         Args:
-            player(str):
+            player(object): A player object
         """
         self.currCard = player.playTurn()   # prints out player's cards
                                             # and also sets the current card
                                             
         player.getCurrCard(self.currCard)   # sets player's current card within
                                             # the spar class
+                                            
+                                            
         
     def scoring(self, num):
         """ This method is used to keep track of the scores
         
         Args:
-            num():
+            num(int): The face value of the last card
             
         Returns:
-        
+            int: The scores
         """
         if num == 6:
             return 3
@@ -88,8 +100,16 @@ class Spar:
         else:
             return 1
             
+            
+            
     def game(self): 
         """This is the method that describes and sets the game and how the game will be played
+        
+        Side effects:
+            prints to stdout
+            modifies the score attribute
+            modifies currCard after each trick
+            modifies the deck and player's hand 
         """
         overallCompScore = 0   
         round = 0
@@ -99,7 +119,7 @@ class Spar:
         
         compTrick = False
         
-        while round < 2:
+        while round < 3:
             print("====ROUND " + str(round + 1) + "====")
             
             if trick == 0:
@@ -173,8 +193,7 @@ class Spar:
                     if compCardPlayed.suit == self.currCard.suit:
                         if compCardPlayed.face > self.currCard.face:
                             compTrick = True
-                            text = colored("**COMPUTER WON TRICK**", 'red', attrs=['reverse', 'blink']) 
-                            print(text)
+                            print("**COMPUTER WON TRICK**----------------")
                     else:
                         compTrick = False
                         print("**PLAYER WON TRICK**----------------")
@@ -207,41 +226,72 @@ class Spar:
                    
 class Card:
     """Creates cards for class and prints values
+    
     Attributes:
         suit(str): suit of cards
         face(str): face of cards
     """
     def __init__(self, face, suit):
+        """sets attributes
+        
+        Args:
+            suit(str): suit of cards
+            face(str): face of cards
+        """
         self.suit = suit
         self.face = face
     
+    
+    
     def __repr__(self):
-        """Create a method using __repr__ to get a printable representation of the object
+        """This method is used to get a formal representation of the object
         
         Returns:
-            f-string
+            f-string: suit and face
         """ 
         return (f"{self.suit},{self.face}")        
          
+            
+            
             
 class Player:
     """Manages player turn
     
     Attributes:
-        name(str): name
-        cards(str): deck of cards
-        currCard(str): current card trick
+        name(str): name of player
+        currCard(object): a card object with a default value of Card(14, "Hearts")
+        cards(list):list of cards
             
     """
     def __init__(self, name, currCard = Card(14, "Hearts"), cards = []):
+        """sets the attributes
+        
+        Args:
+            name(str): name of player
+            currCard(object): a card object with a default value of Card(14, "Hearts")
+            cards(list):list of cards
+        """
         self.name = name
         self.cards = cards
         self.currCard = currCard
         
+        
+        
     def dealCards(self, card):
+        """Deals the card to the player
+        
+        Args:
+            card(object): A card object
+        """
         self.cards.append(card)
     
+    
     def getCurrCard(self, currCard):
+        """Gets the current card on the table for the player
+        
+        Args:
+            currCard(object): This a current card object
+        """
         self.currCard = currCard
         
         
@@ -249,7 +299,7 @@ class Player:
         """Prints out player cards
 
         Returns:
-            currCard(str): returns current card trick 
+            currCard(object): returns current card trick 
         """
        
         print("PLAYER HAND:")
@@ -268,31 +318,60 @@ class ComputerPlayer:
     """Manages Computer's turn
     
     Attributes:
-    name(str): the name of the computer player?
-    currCard(): current card with a default value of Card(14, "Hearts")
-    cards(list):
+        name(str): name of computer player
+        currCard(object): a card object with a default value of Card(14, "Hearts")
+        cards(list): list of cards
     """
     def __init__(self, name, currCard = Card(14, "Hearts"), cards = []):
+        """sets the attributes
+        
+        Args:
+            name(str): name of computer player
+            currCard(object): a card object with a default value of Card(14, "Hearts")
+            cards(list): list of cards
+        """
         self.name = name
         self.cards = cards
         self.currCard = currCard
     
+    
+    
     def dealCards(self, card):
+        """Deals the card to the computer player
+        
+        Args:
+            card(object): A card object
+        """
         self.cards.append(card)
         
+        
+        
     def getCurrCard(self, currCard):
+        """Gets the current card on the table for the computer player
+        
+        Args:
+            currCard(object): This a current card object
+        """
         self.currCard = currCard
         
+        
+        
     def compTurn(self):
+        """Manages the computer player's turn to go
+        
+        Returns:
+            cardToDeal(object): A card object that the computer plays
+            
+        Side effects:
+            prints to stdout
+            modifies cardToDeal
+        """
         highestFace = 0
         lowestFace = 15
         cardToDeal = Card(14, "Hearts")
         goodHand = []
         hasCard = False
         
-        print("COMP HAND:")
-        for card in self.cards:
-            print(str(self.cards.index(card) + 1) + ") " + str(card))
         
         for card in self.cards:
            if card.suit == self.currCard.suit:
@@ -317,7 +396,14 @@ class ComputerPlayer:
         return cardToDeal
 
 def main(name, computer_player):
-    """
+    """ sets up and play a game of spar
+    
+    Args:
+        name(str): name of human player
+        computer_player(str): computer player
+        
+    Side effects:
+        writes to stdout
     """
     players = [Player(name), ComputerPlayer(computer_player)]
    
@@ -326,6 +412,18 @@ def main(name, computer_player):
 
 
 def parse_args(arglist):
+    """Parse command-line arguments.
+    
+    Expect two mandatory arguments:
+        - computer_player: computer
+        - names: one or more names of human players
+    
+    Args:
+        arglist (list of str): arguments from the command line.
+    
+    Returns:
+        namespace: the parsed arguments, as a namespace.
+    """
     parser = ArgumentParser()
     parser.add_argument("names", nargs="*", help="player names")
     parser.add_argument("-c", "--computer_player", action="store_true",
