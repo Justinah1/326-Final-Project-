@@ -194,6 +194,15 @@ class Spar:
                         if compCardPlayed.face > self.currCard.face:
                             compTrick = True
                             print("**COMPUTER WON TRICK**----------------")
+                        else:
+                            compTrick = False
+                            print("**PLAYER WON TRICK**----------------")
+                            print("")
+                            if trick == 4:
+                                self.score += self.scoring(playedCard.face)
+                                tempPlayerScore = self.scoring(playedCard.face)
+                                print("PLAYER EARNED: " + str(tempPlayerScore) + " POINTS")
+                                print("")
                     else:
                         compTrick = False
                         print("**PLAYER WON TRICK**----------------")
